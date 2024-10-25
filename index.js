@@ -22,7 +22,6 @@ io.on("connection", (socket) => {
   socket.on("leave", (data) => {
     const { chatId, user } = data;
     socket.leave(`chat_${chatId}`);
-    socket.disconnect();
   });
 
   socket.on("writing", (data) => {
