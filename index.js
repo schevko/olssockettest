@@ -11,7 +11,7 @@ const io = require("socket.io")(server, {
   },
 });
 
-const port = process.env.PORT ?? 3000;
+const port = process.env.PORT ?? 3010;
 
 io.on("connection", (socket) => {
   socket.on("join", (data) => {
@@ -36,7 +36,7 @@ io.on("connection", (socket) => {
 
   // Mesaj gönderme işlemi
   socket.on("sendMessage", async (data) => {
-    const { chatId, message, senderId, receiver_id, token } = data;
+    const { chatId, message, senderId, receiver_id, token, sender_data } = data;
 
     try {
       // Mesajı kaydet
@@ -60,6 +60,7 @@ io.on("connection", (socket) => {
         sender_id: senderId,
         message,
         receiver_id: receiver_id,
+        sender_data,
       });
     } catch (error) {
       console.error("Mesaj gönderme hatası:", error);
